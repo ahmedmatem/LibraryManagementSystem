@@ -1,5 +1,6 @@
 ﻿namespace LibraryManagementSystem
 {
+    using System.Text.Json;
     using static Constants;
     public class Data
     {
@@ -10,8 +11,12 @@
 
         public void Save()
         {
-            // TODO: Implement Save functionality
-            throw new NotImplementedException();
+            StreamWriter writer = new StreamWriter(filePath);
+            using (writer)
+            {
+                string jsonData = JsonSerializer.Serialize(Books);
+                writer.Write(jsonData);
+            }
         }
 
         public List<Book> LoadBooks()
