@@ -9,6 +9,11 @@
         private StreamReader reader;
         private StreamWriter writer;
 
+        public Data()
+        {
+            LoadBooks();
+        }
+
         public void Save()
         {
             StreamWriter writer = new StreamWriter(filePath);
