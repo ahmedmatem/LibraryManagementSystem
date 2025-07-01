@@ -1,5 +1,6 @@
 ﻿namespace LibraryManagementSystem
 {
+    using System.Text.Json;
     using static Constants;
     public class Data
     {
@@ -14,9 +15,15 @@
             throw new NotImplementedException();
         }
 
-        public List<Book> LoadBooks()
+        public void LoadBooks()
         {
-            throw new NotImplementedException();
+            reader = new StreamReader(filePath);
+            using (reader)
+            {
+                string jsonData = reader.ReadToEnd();
+                Books = JsonSerializer.Deserialize<List<Book>>(jsonData)!;
+            }
+            Books ??= new List<Book>();
         }
         
     }
