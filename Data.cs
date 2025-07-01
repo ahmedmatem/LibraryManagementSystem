@@ -1,5 +1,6 @@
 ﻿namespace LibraryManagementSystem
 {
+    using static Constants;
     public class Data
     {
         private StreamReader reader;
