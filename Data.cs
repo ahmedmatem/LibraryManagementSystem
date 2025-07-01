@@ -2,12 +2,16 @@
 {
     public class Data
     {
+        private StreamReader reader;
+        private StreamWriter writer;
+
         public void Save()
         {
+            // TODO: Implement Save functionality
             throw new NotImplementedException();
         }
 
-        public void LoadBooks()
+        public List<Book> LoadBooks()
         {
             throw new NotImplementedException();
         }
