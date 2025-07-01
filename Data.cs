@@ -3,6 +3,8 @@
     using static Constants;
     public class Data
     {
+        public List<Book> Books { get; private set; }
+
         private StreamReader reader;
         private StreamWriter writer;
 
