@@ -7,6 +7,10 @@
             throw new NotImplementedException();
         }
 
+        public void LoadBooks()
+        {
+            throw new NotImplementedException();
+        }
         
     }
 }
