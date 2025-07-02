@@ -42,21 +42,25 @@ namespace LibraryManagementSystem
 
         private static void DisplayReturnBookUI(List<Book> borrowedBooks)
         {
+            //TODO:Ahmed
             throw new NotImplementedException();
         }
 
         private static void DisplayAllBorrowedBooksUI(List<Book> borrowedBooks)
         {
+            //TODO:Petkova
             throw new NotImplementedException();
         }
 
         private static void DisplayAllBooksUI(List<Book> books)
         {
+            //TODO: Petkova
             throw new NotImplementedException();
         }
 
         private static Book DisplayBorrowBookUI(List<Book> availableBooks)
         {
+            //TODO:Ahmed
             throw new NotImplementedException();
         }
 
@@ -68,6 +72,7 @@ namespace LibraryManagementSystem
         private static Book DisplayAddBookUI()
         {
             // TODO: Implement Display adding of a new book
+            //TODO:Ahmed
             throw new NotImplementedException();
         }
     }
