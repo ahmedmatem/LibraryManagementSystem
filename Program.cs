@@ -21,10 +21,12 @@ namespace LibraryManagementSystem
                         data.Save();
                         break;
                     case "2": // Borrow a book
-                        DisplayBorrowBooUI(data.GetAvailableBooks());
+                        DisplayBorrowBookUI(data.GetAvailableBooks());
                         data.Save();
                         break;
                     case "3": // Return a borrowed book
+                        DisplayReturnBookUI(data.GetBorrowedBooks());
+                        data.Save();
                         break;
                     case "4": // List all books
                         DisplayAllBooksUI(data.Books);
@@ -38,7 +40,12 @@ namespace LibraryManagementSystem
             }
         }
 
-        private static void DisplayAllBorrowedBooksUI(List<Book> books)
+        private static void DisplayReturnBookUI(List<Book> borrowedBooks)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void DisplayAllBorrowedBooksUI(List<Book> borrowedBooks)
         {
             throw new NotImplementedException();
         }
@@ -48,7 +55,7 @@ namespace LibraryManagementSystem
             throw new NotImplementedException();
         }
 
-        private static Book DisplayBorrowBooUI(List<Book> availableBooks)
+        private static Book DisplayBorrowBookUI(List<Book> availableBooks)
         {
             throw new NotImplementedException();
         }
@@ -60,7 +67,7 @@ namespace LibraryManagementSystem
 
         private static Book DisplayAddBookUI()
         {
-            // TODO: Implement Display addind of a new book
+            // TODO: Implement Display adding of a new book
             throw new NotImplementedException();
         }
     }
