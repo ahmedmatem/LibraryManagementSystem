@@ -37,6 +37,16 @@
                 }                
             }
         }
-        
+
+        public List<Book> GetAvailableBooks()
+        {
+            return Books.Where(b => b.IsAvailable).ToList();
+        }
+
+        public List<Book> GetBorrowedBooks()
+        {
+            return Books.Where(b => !b.IsAvailable).ToList();
+        }
+
     }
 }
