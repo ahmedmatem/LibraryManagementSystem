@@ -27,25 +27,32 @@
         public void LoadBooks()
         {
             Books = new List<Book>();
-            reader = new StreamReader(filePath);
-            using (reader)
+            try
             {
-                string jsonData = reader.ReadToEnd();
-                if (!string.IsNullOrEmpty(jsonData))
+                reader = new StreamReader(filePath);
+                using (reader)
                 {
-                    Books = JsonSerializer.Deserialize<List<Book>>(jsonData)!;
-                }                
+                    string jsonData = reader.ReadToEnd();
+                    if (!string.IsNullOrEmpty(jsonData))
+                    {
+                        Books = JsonSerializer.Deserialize<List<Book>>(jsonData)!;
+                    }
+                }
             }
+            catch (FileNotFoundException)
+            {
+                Books = new List<Book>();
+            }            
         }
 
         public List<Book> GetAvailableBooks()
         {
-            return Books.Where(b => b.IsAvailable).ToList();
+            return Books.Where(b => b.IsAvailable).ToList() ?? new List<Book>();
         }
 
         public List<Book> GetBorrowedBooks()
         {
-            return Books.Where(b => !b.IsAvailable).ToList();
+            return Books.Where(b => !b.IsAvailable).ToList() ?? new List<Book>();
         }
 
     }
