@@ -44,6 +44,7 @@ namespace LibraryManagementSystem
                         break;
                     case "4": // List all books
                         DisplayAllBooksUI(data.Books);
+                        BackToMenu("");
                         break;
                     case "5": // List all borrowed books
                         DisplayAllBorrowedBooksUI(data.GetBorrowedBooks());
@@ -80,11 +81,18 @@ namespace LibraryManagementSystem
         private static void DisplayAllBooksUI(List<Book> books)
         {
             Console.Clear();
-            Console.WriteLine("========[ Списък на всички книга ]==========");
+            Console.WriteLine("========[ Списък на всички книги ]==========");
             Console.WriteLine();
-            foreach (Book book in books)
-            {  
-                Console.WriteLine($"▶ {book.Title}"); 
+            if(books.Count > 0)
+            {
+                foreach (Book book in books)
+                {
+                    Console.WriteLine($"▶ {book.Title}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("[ Няма налични книги ]");
             }
         }
 
@@ -158,7 +166,7 @@ namespace LibraryManagementSystem
             return new Book(title, author, year, price);
         }
 
-        private static void BackToMenu(string message, bool success)
+        private static void BackToMenu(string message, bool success = true)
         {
             if (success)
             {
