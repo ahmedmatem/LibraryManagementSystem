@@ -25,13 +25,18 @@ namespace LibraryManagementSystem
                         data.Save();
                         break;
                     case "2": // Borrow a book
-                        bool done = DisplayBorrowBookUI(data.GetAvailableBooks());
+                        bool success = DisplayBorrowBookUI(data.GetAvailableBooks());
                         string message = "Книгата бе заета успешно.";
-                        if (done)
+                        if (success)
                         {
-                            data.Save();
+                            data.Save();message = "Книгата бе заета успешно.";
+                            message = "Книгата бе заета успешно.";
                         }
-                        BackToMenu("Книгата бе заета успешно.", done);
+                        else
+                        {
+                            message = "Книгата бе заета успешно.";
+                        }
+                        BackToMenu(message, success);
                         break;
                     case "3": // Return a borrowed book
                         DisplayReturnBookUI(data.GetBorrowedBooks());
@@ -85,7 +90,7 @@ namespace LibraryManagementSystem
 
         private static bool DisplayBorrowBookUI(List<Book> availableBooks)
         {
-            bool done = true;
+            bool success = true;
             Console.Clear();
 
             Console.WriteLine("==========[ Заемане на книга ]==========");
@@ -113,13 +118,11 @@ namespace LibraryManagementSystem
             }
             else
             {
-                done = false;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Няма налични книги.");
-                Console.ForegroundColor = ConsoleColor.White;
+                success = false;
+                Console.WriteLine("[ Няма налични книги ]");
             }
 
-            return done;
+            return success;
         }
 
         private static void DisplayMenu()
@@ -145,12 +148,12 @@ namespace LibraryManagementSystem
             throw new NotImplementedException();
         }
 
-        private static void BackToMenu(string resultMessage, bool done)
+        private static void BackToMenu(string message, bool success)
         {
-            if (done)
+            if (success)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(resultMessage);
+                Console.WriteLine(message);
                 Console.ForegroundColor = ConsoleColor.White;
             }
             Console.WriteLine();
