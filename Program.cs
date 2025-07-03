@@ -26,6 +26,7 @@ namespace LibraryManagementSystem
                     case "2": // Borrow a book
                         DisplayBorrowBookUI(data.GetAvailableBooks());
                         data.Save();
+                        BackToMenu("Книгата бе заета успешно.");
                         break;
                     case "3": // Return a borrowed book
                         DisplayReturnBookUI(data.GetBorrowedBooks());
@@ -71,10 +72,29 @@ namespace LibraryManagementSystem
             }
         }
 
-        private static Book DisplayBorrowBookUI(List<Book> availableBooks)
+        private static void DisplayBorrowBookUI(List<Book> availableBooks)
         {
             //TODO:Ahmed
-            throw new NotImplementedException();
+            Console.WriteLine("==========[ Заемане на книга ]==========");
+            Console.WriteLine();
+            Console.WriteLine("Списък на всички налични книги");
+            Console.WriteLine();
+            int bookIndex = 0;
+            foreach (var book in availableBooks)
+            {
+                Console.WriteLine($"{bookIndex++:d2}. {book.Title}");
+            }
+            Console.WriteLine();
+
+            Console.Write("Въведете номера на книгата, която искате да заемете: ");
+            int selectedBookIndex = int.Parse(Console.ReadLine()!) - 1;
+
+            Console.Write("Име на заемателя: ");
+            string borrowerName = Console.ReadLine()!;
+
+            Book selectedBook = availableBooks[selectedBookIndex];
+            selectedBook.IsAvailable = false;
+            selectedBook.BorrowerName = borrowerName;
         }
 
         private static void DisplayMenu()
@@ -98,6 +118,16 @@ namespace LibraryManagementSystem
             // TODO: Implement Display adding of a new book
             //TODO:Ahmed
             throw new NotImplementedException();
+        }
+
+        private static void BackToMenu(string resultMessage)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(resultMessage);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+            Console.Write("Натиснете ENTER към меню ");
+            Console.ReadLine();
         }
     }
 }
