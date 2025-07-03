@@ -1,5 +1,7 @@
 ﻿
 
+using static System.Reflection.Metadata.BlobBuilder;
+
 namespace LibraryManagementSystem
 {
     public class Program
@@ -8,6 +10,7 @@ namespace LibraryManagementSystem
 
         public static void Main(string[] args)
         {
+
             DisplayMenu();
 
             string choice;
@@ -48,14 +51,24 @@ namespace LibraryManagementSystem
 
         private static void DisplayAllBorrowedBooksUI(List<Book> borrowedBooks)
         {
-            //TODO:Petkova
-            throw new NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("========[ Спесък на заетите книги ]==========");
+            Console.WriteLine();
+            foreach (Book book in borrowedBooks)
+            {
+                Console.WriteLine($"▶ {book.Title}");
+            }
         }
 
         private static void DisplayAllBooksUI(List<Book> books)
         {
-            //TODO: Petkova
-            throw new NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("========[ Списък на всички книга ]==========");
+            Console.WriteLine();
+            foreach (Book book in books)
+            {  
+                Console.WriteLine($"▶ {book.Title}"); 
+            }
         }
 
         private static Book DisplayBorrowBookUI(List<Book> availableBooks)
