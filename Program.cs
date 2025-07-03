@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text;
+
 namespace LibraryManagementSystem
 {
     public class Program
@@ -8,6 +10,8 @@ namespace LibraryManagementSystem
 
         public static void Main(string[] args)
         {
+            SetIOEncoding();
+
             DisplayMenu();
 
             string choice;
@@ -39,6 +43,12 @@ namespace LibraryManagementSystem
                         break;
                 }
             }
+        }
+
+        private static void SetIOEncoding()
+        {
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
         }
 
         private static void DisplayReturnBookUI(List<Book> borrowedBooks)
