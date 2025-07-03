@@ -133,7 +133,7 @@ namespace LibraryManagementSystem
             Console.WriteLine("|  [1] ▶ Добавяне на книга                     |");
             Console.WriteLine("|  [2] ▶ Заемане на книга                      |");
             Console.WriteLine("|  [3] ▶ Връщане на книга                      |");
-            Console.WriteLine("|  [4] ▶ Спарвка за всички книги               |");
+            Console.WriteLine("|  [4] ▶ Спрaвка за всички книги               |");
             Console.WriteLine("|  [5] ▶ Справка за заети книги                |");
             Console.WriteLine("|  [x] ▶ Изход                                 |");
             Console.WriteLine("|                                              |");
@@ -143,9 +143,19 @@ namespace LibraryManagementSystem
 
         private static Book DisplayAddBookUI()
         {
-            // TODO: Implement Display adding of a new book
-            //TODO:Ahmed
-            throw new NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("=====[ Добави книга ]=====");
+            Console.WriteLine();
+            Console.Write("Въведи заглавие: "); string title = Console.ReadLine();
+            Console.Write("Въведи автор: "); string author = Console.ReadLine();
+            Console.Write("Въведи година: "); int year = int.Parse(Console.ReadLine());
+            Console.Write("Въведи цена: "); decimal price = decimal.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Успешно добавена книга");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            return new Book(title, author, year, price);
         }
 
         private static void BackToMenu(string message, bool success)
