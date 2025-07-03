@@ -88,21 +88,28 @@ namespace LibraryManagementSystem
             Console.WriteLine("Списък на всички налични книги");
             Console.WriteLine();
             int bookIndex = 0;
-            foreach (var book in availableBooks)
+            if(availableBooks.Count > 0)
             {
-                Console.WriteLine($"{bookIndex++:d2}. {book.Title}");
+                foreach (var book in availableBooks)
+                {
+                    Console.WriteLine($"{bookIndex++:d2}. {book.Title}");
+                }
+                Console.WriteLine();
+
+                Console.Write("Въведете номера на книгата, която искате да заемете: ");
+                int selectedBookIndex = int.Parse(Console.ReadLine()!) - 1;
+
+                Console.Write("Име на заемателя: ");
+                string borrowerName = Console.ReadLine()!;
+
+                Book selectedBook = availableBooks[selectedBookIndex];
+                selectedBook.IsAvailable = false;
+                selectedBook.BorrowerName = borrowerName;
             }
-            Console.WriteLine();
-
-            Console.Write("Въведете номера на книгата, която искате да заемете: ");
-            int selectedBookIndex = int.Parse(Console.ReadLine()!) - 1;
-
-            Console.Write("Име на заемателя: ");
-            string borrowerName = Console.ReadLine()!;
-
-            Book selectedBook = availableBooks[selectedBookIndex];
-            selectedBook.IsAvailable = false;
-            selectedBook.BorrowerName = borrowerName;
+            else
+            {
+                Console.WriteLine("Няма налични книги.");
+            }
         }
 
         private static void DisplayMenu()
