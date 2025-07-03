@@ -81,7 +81,8 @@ namespace LibraryManagementSystem
 
         private static void DisplayBorrowBookUI(List<Book> availableBooks)
         {
-            //TODO:Ahmed
+            Console.Clear();
+
             Console.WriteLine("==========[ Заемане на книга ]==========");
             Console.WriteLine();
             Console.WriteLine("Списък на всички налични книги");
