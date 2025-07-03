@@ -86,7 +86,18 @@ namespace LibraryManagementSystem
 
         private static void DisplayMenu()
         {
-            // TODO: Implement application menu
+            Console.Clear();
+            Console.WriteLine("==================[ М Е Н Ю ]==================");
+            Console.WriteLine("|                                              |");
+            Console.WriteLine("|  [1] ▶ Добавяне на книга                     |");
+            Console.WriteLine("|  [2] ▶ Заемане на книга                      |");
+            Console.WriteLine("|  [3] ▶ Връщане на книга                      |");
+            Console.WriteLine("|  [4] ▶ Спарвка за всички книги               |");
+            Console.WriteLine("|  [5] ▶ Справка за заети книги                |");
+            Console.WriteLine("|  [x] ▶ Изход                                 |");
+            Console.WriteLine("|                                              |");
+            Console.WriteLine("===============================================");
+            Console.Write("> Изберете опция: ");
         }
 
         private static Book DisplayAddBookUI()
