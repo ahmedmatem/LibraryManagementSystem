@@ -40,7 +40,6 @@ namespace LibraryManagementSystem
                         break;
                     case "2": // Borrow a book
                         success = DisplayBorrowBookUI(data.GetAvailableBooks());
-                        message = "Книгата бе заета успешно.";
                         if (success)
                         {
                             data.Save();message = "Книгата бе заета успешно.";
@@ -48,7 +47,7 @@ namespace LibraryManagementSystem
                         }
                         else
                         {
-                            message = "Книгата бе заета успешно.";
+                            message = "Възникна грешка при заемане на книга.";
                         }
                         BackToMenu(message, success);
                         break;
@@ -64,6 +63,7 @@ namespace LibraryManagementSystem
                         break;
                     case "5": // List all borrowed books
                         DisplayAllBorrowedBooksUI(data.GetBorrowedBooks());
+                        BackToMenu("");
                         break;
                     default:
                         break;
@@ -147,12 +147,21 @@ namespace LibraryManagementSystem
                 Console.Write("Въведете номера на книгата, която искате да заемете: ");
                 int selectedBookIndex = int.Parse(Console.ReadLine()!) - 1;
 
-                Console.Write("Име на заемателя: ");
-                string borrowerName = Console.ReadLine()!;
-                
-                Book selectedBook = availableBooks[selectedBookIndex];
-                selectedBook.IsAvailable = false;
-                selectedBook.BorrowerName = borrowerName;
+                // Validate inde of selected book
+                if(selectedBookIndex < availableBooks.Count)
+                {
+                    Console.Write("Име на заемателя: ");
+                    string borrowerName = Console.ReadLine()!;
+
+                    Book selectedBook = availableBooks[selectedBookIndex];
+                    selectedBook.IsAvailable = false;
+                    selectedBook.BorrowerName = borrowerName;
+                }
+                else
+                {
+                    success = false;
+                    Console.WriteLine("[ Грешен номер на книга. ]");
+                }
             }
             else
             {
