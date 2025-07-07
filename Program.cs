@@ -72,7 +72,7 @@ namespace LibraryManagementSystem
 
             foreach (Book book in borrowedBooks)
             {
-                Console.WriteLine($"▶ {++bookIndex:d3}.{book.Title}");
+                Console.WriteLine($"▶ {++bookIndex:d3}. {book.Title}");
             }
             Console.Write("Въведете номера на книгата, която искате да върнете: ");
             int selectedBookIndex = int.Parse(Console.ReadLine()!) - 1;
@@ -135,7 +135,7 @@ namespace LibraryManagementSystem
 
                 Console.Write("Име на заемателя: ");
                 string borrowerName = Console.ReadLine()!;
-
+                
                 Book selectedBook = availableBooks[selectedBookIndex];
                 selectedBook.IsAvailable = false;
                 selectedBook.BorrowerName = borrowerName;
