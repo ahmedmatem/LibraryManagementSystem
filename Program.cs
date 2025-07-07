@@ -86,7 +86,7 @@ namespace LibraryManagementSystem
 
             foreach (Book book in borrowedBooks)
             {
-                Console.WriteLine($"▶ {++bookIndex:d3}. {book.Title}");
+                Console.WriteLine($"▶ {++bookIndex:d3}. {book}");
             }
             Console.Write("Въведете номера на книгата, която искате да върнете: ");
             int selectedBookIndex = int.Parse(Console.ReadLine()!) - 1;
@@ -103,7 +103,7 @@ namespace LibraryManagementSystem
             Console.WriteLine();
             foreach (Book book in borrowedBooks)
             {
-                Console.WriteLine($"▶ {book.Title}");
+                Console.WriteLine($"▶ {book}");
             }
 
         }
@@ -117,7 +117,7 @@ namespace LibraryManagementSystem
             {
                 foreach (Book book in books)
                 {
-                    Console.WriteLine($"▶ {book.Title} - {book.Author}, {book.Year}");
+                    Console.WriteLine($"▶ {book}");
                 }
             }
             else
@@ -140,7 +140,7 @@ namespace LibraryManagementSystem
             {
                 foreach (var book in availableBooks)
                 {
-                    Console.WriteLine($"{++bookIndex:d2}. {book.Title}");
+                    Console.WriteLine($"{++bookIndex:d2}. {book}");
                 }
                 Console.WriteLine();
 

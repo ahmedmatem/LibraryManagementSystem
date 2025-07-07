@@ -101,6 +101,13 @@
             IsAvailable = true;
             BorrowerName = "";
         }
+
+        public override string ToString()
+        {
+            return !isAvailable ?
+                $"{Title}, {Year}, {Author} - {BorrowerName}" :
+                $"{Title}, {Year}, {Author}";
+        }
     }
 }
 
