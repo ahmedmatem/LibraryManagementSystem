@@ -119,7 +119,7 @@ namespace LibraryManagementSystem
 
                 Console.Write("Име на заемателя: ");
                 string borrowerName = Console.ReadLine()!;
-
+                
                 Book selectedBook = availableBooks[selectedBookIndex];
                 selectedBook.IsAvailable = false;
                 selectedBook.BorrowerName = borrowerName;
