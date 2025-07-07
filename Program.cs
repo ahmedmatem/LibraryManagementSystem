@@ -52,7 +52,6 @@ namespace LibraryManagementSystem
                         BackToMenu(message, success);
                         break;
                     case "3": // Return a borrowed book
-
                         DisplayReturnBookUI(data.GetBorrowedBooks());
                         data.Save();
                         BackToMenu("");
@@ -84,16 +83,42 @@ namespace LibraryManagementSystem
             Console.WriteLine();
             int bookIndex = 0;
 
+            if(borrowedBooks.Count == 0)
+            {
+                Console.WriteLine("Няма книги за връщане");
+                Console.WriteLine();
+                return;
+            }
+
             foreach (Book book in borrowedBooks)
             {
                 Console.WriteLine($"▶ {++bookIndex:d3}. {book}");
             }
+
+            Console.WriteLine();
             Console.Write("Въведете номера на книгата, която искате да върнете: ");
-            int selectedBookIndex = int.Parse(Console.ReadLine()!) - 1;
-            Book selectedBook = borrowedBooks[selectedBookIndex];
-            selectedBook.IsAvailable = true;
-            selectedBook.BorrowerName = "";
-           
+            int selectedBookIndex;
+            if(int.TryParse(Console.ReadLine()!, out selectedBookIndex))
+            {
+                if (selectedBookIndex - 1 < borrowedBooks.Count)
+                {
+                    Book selectedBook = borrowedBooks[selectedBookIndex - 1];
+                    selectedBook.IsAvailable = true;
+                    selectedBook.BorrowerName = "";
+                    Console.WriteLine("Книгата е върната успешно.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("[ Грешен номер на книга. ]");
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("[ Грешен номер на книга. ]");
+                Console.WriteLine();
+            }          
         }
 
         private static void DisplayAllBorrowedBooksUI(List<Book> borrowedBooks)
