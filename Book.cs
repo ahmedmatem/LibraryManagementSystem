@@ -5,7 +5,6 @@
     /// <summary>
     /// Model for book item in a library.
     /// </summary>
-    /// <param name="title">The new title of the book.</param>
     /// <exception cref="InvalidDataException">Throws an exception if user input is invalid </throw>
     public class Book
     {
