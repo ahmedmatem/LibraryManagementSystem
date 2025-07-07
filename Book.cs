@@ -14,7 +14,6 @@
         private int year;
         private decimal price;
         private bool isAvailable;
-        private string borrowerName;
 
         public string ISBN { get; set; }
 
@@ -23,11 +22,12 @@
             get { return title; }
             set
             {
-                if (!string.IsNullOrEmpty(value.Trim()))
+                if (string.IsNullOrEmpty(value.Trim()))
                 {
-                    title = value;
+                    throw new InvalidDataException("Невалидно име на книга.");
                 }
-                throw new InvalidDataException("Невалидно име на книга.");
+
+                title = value;
             }
         }
 
@@ -36,11 +36,12 @@
             get { return author; }
             set
             {
-                if (!string.IsNullOrEmpty(value.Trim()))
+                if (string.IsNullOrEmpty(value.Trim()))
                 {
-                    author = value;
+                    throw new InvalidDataException("Невалидно име на автор.");
                 }
-                throw new InvalidDataException("Невалидно име на автор.");
+
+                author = value;
             }
         }
 
@@ -50,12 +51,12 @@
             set
             {
 
-                if(1800 <= year && year <= DateTime.Now.Year)
+                if(value < 1800 || DateTime.Now.Year < value)
                 {
-                    year = value;
-                    return;
+                    throw new InvalidDataException($"Годината на издаване трябва да е между 01/01/1800 и {DateTime.Now.ToShortDateString}");
                 }
-                throw new InvalidDataException($"Годината на издаване трябва да е между 01/01/1800 и {DateTime.Now.ToShortDateString}");
+
+                year = value;
             }
         }
 
@@ -69,6 +70,7 @@
                 {
                     throw new InvalidDataException("Цената трябва да е положително число.");
                 }
+
                 price = value;
             }
         }
@@ -82,23 +84,12 @@
                 // if book was set as available the borrower name will be cleared automatically.
                 if (isAvailable)
                 {
-                    borrowerName = string.Empty;
+                    BorrowerName = string.Empty;
                 }
             }
         }
 
-        public string BorrowerName
-        {
-            get { return borrowerName; }
-            set
-            {
-                if (!string.IsNullOrEmpty(value.Trim()))
-                {
-                    borrowerName = value;
-                }
-                throw new InvalidDataException("Невалидно име на заемател.");
-            }
-        }
+        public string BorrowerName { get; set; }
 
         public Book(string title, string author, int year, decimal price)
         {

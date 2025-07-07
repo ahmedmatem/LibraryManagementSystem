@@ -15,18 +15,32 @@ namespace LibraryManagementSystem
             DisplayMenu();
 
             string choice;
+            string message = "";
+            bool success = true;
             while ((choice = Console.ReadLine()) != "x")
             {
                 switch (choice)
                 {
                     case "1": // Add a new book
-                        Book newBook = DisplayAddBookUI();
-                        data.Books.Add(newBook);
-                        data.Save();
+                        try
+                        {
+                            // throw InvalidDataException if some invalid date was typed for a book
+                            Book newBook = DisplayAddBookUI();
+                            data.Books.Add(newBook);
+                            data.Save();
+                            message = "Успешно добавена книга.";
+                            success = true;
+                        }
+                        catch(InvalidDataException e)
+                        {
+                            message = e.Message;
+                            success = false;
+                        }
+                        BackToMenu(message, success);
                         break;
                     case "2": // Borrow a book
-                        bool success = DisplayBorrowBookUI(data.GetAvailableBooks());
-                        string message = "Книгата бе заета успешно.";
+                        success = DisplayBorrowBookUI(data.GetAvailableBooks());
+                        message = "Книгата бе заета успешно.";
                         if (success)
                         {
                             data.Save();message = "Книгата бе заета успешно.";
@@ -170,26 +184,44 @@ namespace LibraryManagementSystem
             Console.Clear();
             Console.WriteLine("=====[ Добави книга ]=====");
             Console.WriteLine();
-            Console.Write("Въведи заглавие: "); string title = Console.ReadLine();
-            Console.Write("Въведи автор: "); string author = Console.ReadLine();
-            Console.Write("Въведи година: "); int year = int.Parse(Console.ReadLine());
-            Console.Write("Въведи цена: "); decimal price = decimal.Parse(Console.ReadLine());
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Успешно добавена книга");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Въведи заглавие: "); 
+            string title = Console.ReadLine();
 
-            return new Book(title, author, year, price);
+            Console.Write("Въведи автор: ");
+            string author = Console.ReadLine();
+            
+            Console.Write("Въведи година: ");
+            int year;
+            if(!int.TryParse(Console.ReadLine(), out year))
+            {
+                throw new InvalidDataException("Въвели сте невалидни данни за книгата.");
+            }
+
+            Console.Write("Въведи цена: ");
+            decimal price;
+            if(!decimal.TryParse(Console.ReadLine(), out price))
+            {
+                throw new InvalidDataException("Въвели сте невалидни данни за книгата.");
+            }
+
+            Console.WriteLine();
+            try
+            {
+                Book newBook = new Book(title, author, year, price);
+                return newBook;
+            }
+            catch(InvalidDataException e)
+            {
+                throw new InvalidDataException(e.Message);
+            }
         }
 
         private static void BackToMenu(string message, bool success = true)
         {
-            if (success)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(message);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
+            Console.ForegroundColor = success ? ConsoleColor.Green : ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
+
             Console.WriteLine();
             Console.Write("Натиснете ENTER към меню ");
             Console.ReadLine();
