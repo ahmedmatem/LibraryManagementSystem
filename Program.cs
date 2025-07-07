@@ -39,8 +39,10 @@ namespace LibraryManagementSystem
                         BackToMenu(message, success);
                         break;
                     case "3": // Return a borrowed book
+
                         DisplayReturnBookUI(data.GetBorrowedBooks());
                         data.Save();
+                        BackToMenu("");
                         break;
                     case "4": // List all books
                         DisplayAllBooksUI(data.Books);
@@ -63,8 +65,21 @@ namespace LibraryManagementSystem
 
         private static void DisplayReturnBookUI(List<Book> borrowedBooks)
         {
-            //TODO:Ahmed
-            throw new NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("========[ Спесък на заетите книги ]==========");
+            Console.WriteLine();
+            int bookIndex = 0;
+
+            foreach (Book book in borrowedBooks)
+            {
+                Console.WriteLine($"▶ {++bookIndex:d3}.{book.Title}");
+            }
+            Console.Write("Въведете номера на книгата, която искате да върнете: ");
+            int selectedBookIndex = int.Parse(Console.ReadLine()!) - 1;
+            Book selectedBook = borrowedBooks[selectedBookIndex];
+            selectedBook.IsAvailable = true;
+            selectedBook.BorrowerName = "";
+           
         }
 
         private static void DisplayAllBorrowedBooksUI(List<Book> borrowedBooks)
@@ -76,6 +91,7 @@ namespace LibraryManagementSystem
             {
                 Console.WriteLine($"▶ {book.Title}");
             }
+
         }
 
         private static void DisplayAllBooksUI(List<Book> books)
@@ -87,7 +103,7 @@ namespace LibraryManagementSystem
             {
                 foreach (Book book in books)
                 {
-                    Console.WriteLine($"▶ {book.Title}");
+                    Console.WriteLine($"▶ {book.Title} - {book.Author}, {book.Year}");
                 }
             }
             else
@@ -110,7 +126,7 @@ namespace LibraryManagementSystem
             {
                 foreach (var book in availableBooks)
                 {
-                    Console.WriteLine($"{bookIndex++:d2}. {book.Title}");
+                    Console.WriteLine($"{++bookIndex:d2}. {book.Title}");
                 }
                 Console.WriteLine();
 
